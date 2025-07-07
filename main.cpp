@@ -43,11 +43,16 @@ public:
 
     explicit Vector(const T *data_, int const size) {
         if (size == 0) {
-            Vector(0);
+            data = new T[1];
+            vector_size = 0;
+            actual_size = 1;
             return;
         }
         vector_size = size;
-        actual_size = 1u << (8 - __builtin_clz(vector_size - 1));
+        actual_size = 1;
+        while (actual_size < vector_size) {
+            actual_size <<= 1;
+        }
 
         data = new T[actual_size];
         for (int i = 0; i < vector_size; ++i) {
