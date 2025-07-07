@@ -77,7 +77,27 @@ public:
         if (vector_size * 2 < actual_size && actual_size > 1) {
             retract();
         }
+    }
 
+    Vector(const Vector& other) {
+        vector_size = other.vector_size;
+        actual_size = other.actual_size;
+        data = new T[actual_size];
+        for (int i = 0; i < vector_size; ++i) {
+            data[i] = other.data[i];
+        }
+    }
+
+    Vector& operator=(const Vector& other) {
+        if (this == &other) return *this;
+        delete[] data;
+        vector_size = other.vector_size;
+        actual_size = other.actual_size;
+        data = new T[actual_size];
+        for (int i = 0; i < vector_size; ++i) {
+            data[i] = other.data[i];
+        }
+        return *this;
     }
 
     T& operator[](int ind) {
