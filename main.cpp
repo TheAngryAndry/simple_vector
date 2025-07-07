@@ -35,6 +35,7 @@ public:
         actual_size = 1;
     }
 
+
     explicit Vector(int const size) {
         data = new T[size];
         vector_size = 0;
